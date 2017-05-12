@@ -8,6 +8,8 @@ if ( !$conexion) {
 }
 else {
 	$users = obtenerRegistros($conexion);
+	$user_modificar = obtenerModificado($conexion);
+	//print_r($user_modificar[0]['nombre']);
 }
 
 ?>
@@ -24,28 +26,33 @@ else {
 <body>
 	<div class="container my-5 ">
 
-		<form class ="p-5 mb-5" action="agregar.php" method="POST">
+		<form class ="p-5 mb-5" action="mod.php" method="POST">
+			
+			<input type="hidden" id="id" name="id"  value="<?php echo $user_modificar[0]['id'];?>">
+			 
+		
 			<div class="form-group row">
 			  <label for="nombre" class="col-md-2 col-form-label">Nombre</label>
 			  <div class="col-md-10">
-			    <input class="form-control" type="name" id="nombre" name="nombre" placeholder="Nombre">
+			    <input class="form-control" type="name" id="nombre" name="nombre"  value="<?php echo $user_modificar[0]['nombre'];?>">
 			  </div>
 			</div>
 			<div class="form-group row">
 			  <label for="direccion" class="col-md-2 col-form-label">Direccion</label>
 			  <div class="col-md-10">
-			    <input class="form-control" type="text" id="direccion" name="direccion" placeholder="Direccion">
+			    <input class="form-control" type="text" id="direccion" name="direccion" value="<?php echo $user_modificar[0]['direccion'];?>">
 			  </div>
 			</div>
 			<div class="form-group row">
 			  <label for="telefono" class="col-md-2 col-form-label">Telefono</label>
 			  <div class="col-md-10">
-			    <input class="form-control" type="text" id="telefono" name="telefono" placeholder="Telefono">
+			    <input class="form-control" type="text" id="telefono" name="telefono" value="<?php echo $user_modificar[0]['telefono'];?>">
 			  </div>
 			</div>
-
-
-			<button type="submit" class="btn btn-info">Guardar</button>
+			
+			<a href="index.php" class="btn btn-danger">Cancelar</a>
+			<button type="submit" class="btn btn-success">Modificar</button>
+			
 		</form>
 
 		<table class="table table-responsive">
@@ -67,9 +74,9 @@ else {
                         <td><?php echo $value['nombre']; ?></td>
                         <td><?php echo $value['direccion']; ?></td>
                         <td><?php echo $value['telefono']; ?></td>
-                        <td class="d-flex">
+                        <td  class="d-flex">
                             <!--?id=1-->
-                            <a href="modificar.php?id=<?php echo $value['id']; ?>" class="btn btn-warning mx-1"><i class="fa fa-pencil fa-2x"></i>Modificar</a>
+                            <a href="articulo_modificar.php?id=<?php echo $value['id']; ?>" class="btn btn-warning mx-1"><i class="fa fa-pencil fa-2x"></i>Modificar</a>
                             <a href="eliminar.php?id=<?php echo $value['id'];?>"class="btn btn-danger">
                                 <i class="fa fa-trash fa-2x"></i>Eliminar
                             </a>
